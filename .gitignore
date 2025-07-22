@@ -1,2 +1,4 @@
 .env
-RHEL Hardening with Packer_Ansible_.docx
+
+# packer/secrets.pkrvars.hcl
+packer_user_password = "123"

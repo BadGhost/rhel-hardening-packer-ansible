@@ -1,0 +1,9 @@
+# ansible/group_vars/all/cis_settings.yml
+
+rhel9cis_rule_2_1_1_services_disabled:
+  - autofs
+  - avahi-daemon
+  # - cockpit
+  - cups
+  - dhcpd
+  - dnsmasq
