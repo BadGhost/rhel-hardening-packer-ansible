@@ -1,0 +1,65 @@
+---
+# CIS RHEL 9 Benchmark settings
+
+# 1. Initial Setup
+cis_level: 2                      # CIS Level (1 or 2)
+cis_enable_firewalld: true        # Enable firewalld
+cis_remove_packages:              # Packages to remove
+  - telnet
+  - telnet-server
+  - rsh-server
+  - rsh
+  - ypbind
+  - ypserv
+  - tftp
+  - tftp-server
+  - talk
+  - talk-server
+  - xinetd
+  - xorg-x11-server-common
+
+# 2. Services
+cis_disable_services:             # Services to disable
+  - avahi-daemon
+  - cups
+  - dhcpd
+  - slapd
+  - nfs
+  - rpcbind
+  - named
+  - vsftpd
+  - httpd
+  - dovecot
+  - smb
+  - squid
+  - snmpd
+  - ypserv
+  - rsh.socket
+  - rlogin.socket
+  - rexec.socket
+  - telnet.socket
+  - tftp.socket
+  - xinetd
+
+# 3. Network Configuration
+cis_disable_ipv6: true            # Disable IPv6
+cis_enable_host_firewall: true    # Enable host-based firewall
+cis_firewall_default_zone: drop   # Default firewall zone
+
+# 4. Logging and Auditing
+cis_configure_auditd: true        # Configure auditd
+cis_max_log_file_size: 10         # Maximum log file size in MB
+cis_remote_logging_host: ""       # Remote logging host (if any)
+
+# 5. Access, Authentication and Authorization
+cis_password_min_length: 14       # Minimum password length
+cis_password_max_days: 90         # Maximum password age
+cis_password_min_days: 7          # Minimum password age
+cis_password_warn_age: 7          # Password expiration warning days
+cis_failed_password_attempts: 5   # Failed password attempts before lockout
+cis_password_reuse: 5             # Password reuse limit
+
+# 6. System Maintenance
+cis_umask_default: "027"          # Default umask
+cis_core_dumps_disabled: true     # Disable core dumps
+cis_enable_aslr: true             # Enable ASLR
