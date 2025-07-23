@@ -1,0 +1,36 @@
+# ansible/playbook.yml
+- name: Harden RHEL 9 Server
+  hosts: all
+  become: yes
+
+  vars:
+    # This variable tells the CIS role which controls to apply.
+    # Level 1 is a good baseline. Level 2 is more stringent.
+    rhel9cis_level1_server: true
+    rhel9cis_level2_server: false
+
+  roles:
+    - role: ansible-lockdown.rhel9_cis
+
+  tasks:
+    - name: "CUSTOM | 1.1.1.1 | Disable unnecessary filesystems"
+      community.general.modprobe:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - cramfs
+        - freevxfs
+        - jffs2
+        - hfs
+        - hfsplus
+        - udf
+
+    - name: "CUSTOM | 3.3.2 | Configure firewalld rules"
+      ansible.posix.firewalld:
+        service: "{{ item.service }}"
+        permanent: true
+        state: enabled
+        zone: public
+      loop:
+        - { service: ssh }
+        # - { service: http } # Example: uncomment if you need a web server
