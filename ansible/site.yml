@@ -1,0 +1,8 @@
+# Ansible Playbook for CIS Hardening
+
+- hosts: all
+  become: yes
+  vars:
+    # Add CIS variables as needed
+  roles:
+    - cis_hardening

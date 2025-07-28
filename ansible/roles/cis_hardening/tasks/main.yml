@@ -1,0 +1,21 @@
+---
+# Example CIS hardening tasks
+- name: Ensure password authentication is required for SSH
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication'
+    line: 'PasswordAuthentication yes'
+    state: present
+
+- name: Ensure SSH root login is disabled
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+    state: present
+
+- name: Ensure firewall is enabled and running
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
