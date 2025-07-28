@@ -2,16 +2,17 @@
   "builders": [
     {
       "type": "virtualbox-iso",
-      "iso_url": "C:/Users/ifirdaus/Downloads/rhel-9.6-x86_64-dvd.iso",
-      "iso_checksum": "auto",
+      "iso_url": "/mnt/c/Users/ifirdaus/Downloads/rhel-9.6-x86_64-dvd.iso",
+      "iso_checksum": "none",
       "guest_os_type": "RedHat_64",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "30m",
+      "guest_additions_mode": "disable",
       "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
       "vm_name": "rhel-9.6-cis",
       "disk_size": 20480,
-      "http_directory": "http",
+      "http_directory": "packer/http",
       "boot_wait": "5s",
       "boot_command": [
         "<tab> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter>"
@@ -25,7 +26,7 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "../ansible/site.yml",
+      "playbook_file": "/mnt/c/Users/ifirdaus/Documents/repo/rhel-hardening-packer-ansible/ansible/site.yml",
       "user": "vagrant",
       "extra_arguments": ["-e", "ansible_python_interpreter=/usr/bin/python3"]
     }
